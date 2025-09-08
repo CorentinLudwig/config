@@ -1,4 +1,4 @@
-i#
+#
 # ~/.bashrc
 #
 
@@ -7,17 +7,26 @@ i#
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias dcd='discord --enable-features=UseOzonePlatform --ozone-platform=wayland >/dev/null 2>&1 &'
+alias dcd='discord >/dev/null 2>&1 &'
+alias ffx='firefox >/dev/null 2>&1 &'
 PS1='[\u@\h \W]\$ '
 
 
 #custom alias
 alias la='ls -a'
 alias ll='ls -l'
+alias g='git'
+
+alias dcd='discord >/dev/null 2>&1 &'
+alias ffx='firefox >/dev/null 2>&1 &'
+
 
 #enable auto completion for git
-if [ -f /usr/share/git/completion/git-completion.bash ]; then
-	. /usr/share/git/completion/git-completion.bash
+if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+    . /usr/share/git/completion/git-prompt.sh
+    export GIT_PS1_SHOWDIRTYSTATE="true"
+    export GIT_PS1_SHOWUPSTREAM="verbose git"
+    export GIT_PS1_DESCRIBE_STYLE="branch"
 fi
 
 
@@ -34,5 +43,3 @@ if [ -f ~/.git-prompt.sh ]; then
     # alternatively:
     # PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 fi
-
-PROMPT_COMMAND='PS1_CMD1=$(__git_ps1 " (%s)")'; PS1='[\u \w${PS1_CMD1}]\n\$'
