@@ -14,7 +14,7 @@ PS1='[\u@\h \W]\$ '
 
 #custom alias
 alias la='ls -a'
-alias ll='ls -l'
+alias ll='ls -a -l'
 alias g='git'
 
 alias dcd='discord >/dev/null 2>&1 &'
