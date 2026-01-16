@@ -14,10 +14,11 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term foot
+set $term wezterm
 # Your preferred application launcher
 set $menu wmenu-run
 
+# change keyboard layout
 # change keyboard layout
 input type:keyboard {
 	xkb_layout "fr"
@@ -29,39 +30,27 @@ input type:keyboard {
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+
+# --- Monitor layout ---
+# HDMI-A-1 on the left
+output HDMI-A-1 {
+    mode 1920x1080@60Hz
+    pos 0 0
+}
+
+# DP-2 in the center
+output DP-2 {
+    mode 1920x1080@60Hz
+    pos 1920 0
+}
+
+# DP-3 on the right
+output DP-3 {
+    mode 1920x1080@60Hz
+    pos 3840 0
+}
 
 ## Auto assignement workspace
 assign [app_id="firefox"] workspace 2
@@ -77,6 +66,11 @@ input * xkb_numlock enable
 ### Key bindings
 
 
+
+set $menu bemenu-run --accept-single --prompt "Run: " --border 1 --line-height 20
+bindsym $mod+d exec $menu
+
+
 # Region screenshot (like Win+Ctrl+S, saves to ~/Pictures)
 bindsym $mod+Ctrl+s exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png
 
@@ -85,16 +79,13 @@ bindsym $mod+c exec ~/scripts/autoclick.sh
 
 
 #
-# Basics:
-#
+# Basic
+    
     # Start a terminal
     bindsym $mod+Return exec $term
 
     # Kill focused window
     bindsym $mod+Shift+q kill
-
-    # Start your launcher
-    bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
