@@ -15,3 +15,6 @@ For zsh
 ```
 chsh -s $(which zsh)
 ```
+For song management
+
+qpwgraph
