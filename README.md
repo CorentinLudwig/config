@@ -18,3 +18,9 @@ chsh -s $(which zsh)
 For song management
 
 qpwgraph
+
+run game:
+
+lutris
+
+pirmatic // mincraft
