@@ -10,6 +10,8 @@ systemctl --user enable --now pipewire pipewire-pulse wireplumber
 
 sudo pacman -S xdg-desktop-portal xdg-desktop-portal-wlr
 ```
+vesktop-bin for streaming
+
 For zsh
 
 ```
