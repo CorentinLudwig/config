@@ -77,7 +77,7 @@ input * xkb_numlock enable
 
 
 
-bindsym f7 exec wezterm start --class lantern-popup -e /home/eritque/.local/bin/lantern
+bindsym f7 exec wezterm start --class lantern-popup -e /home/{user}//.local/bin/lantern
 for_window [app_id="lantern-popup"] {
     floating enable
     sticky enable
