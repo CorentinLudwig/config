@@ -1,3 +1,6 @@
+xwayland enable
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway DISPLAY
+
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
@@ -20,11 +23,14 @@ set $menu wmenu-run
 
 # change keyboard layout
 # change keyboard layout
-input type:keyboard {
-	xkb_layout "fr"
-	xkb_variant "azerty"
+input "type:keyboard" {
+    # Sets both layouts: French (azerty) and US (qwerty)
+    xkb_layout "fr,us"
+    
+    # Defines the shortcut to toggle (Caps Lock is a popular choice)
+    # Options: 'grp:alt_shift_toggle', 'grp:win_space_toggle', 'grp:caps_toggle'
+    xkb_options "grp:alt_shift_toggle"
 }
-
 
 ### Output configuration
 #
@@ -34,26 +40,30 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 
 # --- Monitor layout ---
-# HDMI-A-1 on the left
-output HDMI-A-1 {
+output DP-2  {
     mode 1920x1080@60Hz
     pos 0 0
 }
 
 # DP-2 in the center
-output DP-2 {
+output DP-3 {
     mode 1920x1080@60Hz
     pos 1920 0
 }
+workspace 1 output DP-1
 
 # DP-3 on the right
-output DP-3 {
+output HDMI-A-1 {
     mode 1920x1080@60Hz
     pos 3840 0
 }
-
+workspace 10 output HDMI-A-1
 ## Auto assignement workspace
-assign [app_id="firefox"] workspace 2
+#assign [app_id="firefox"] workspace 2
+
+# Options: 'smart', 'urgent', 'focus', or 'none'
+# No auto focus
+focus_on_window_activation urgent
 
 exec_always {
     export DISPLAY=:0
@@ -67,9 +77,14 @@ input * xkb_numlock enable
 
 
 
-set $menu bemenu-run --accept-single --prompt "Run: " --border 1 --line-height 20
-bindsym $mod+d exec $menu
-
+bindsym f7 exec wezterm start --class lantern-popup -e /home/eritque/.local/bin/lantern
+for_window [app_id="lantern-popup"] {
+    floating enable
+    sticky enable
+    resize set 800 500
+    move position center
+    border pixel 2
+}
 
 # Region screenshot (like Win+Ctrl+S, saves to ~/Pictures)
 bindsym $mod+Ctrl+s exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png

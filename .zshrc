@@ -10,7 +10,7 @@
 [[ -o interactive ]] || return
 
 # ─────────────────────────────────────────────
-# Aliases (équivalent bash)
+# Aliases
 # ─────────────────────────────────────────────
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -20,20 +20,18 @@ alias ll='ls -a -l'
 alias g='git'
 alias gits='git status'
 
-alias dcd='discord >/dev/null 2>&1 &'
-alias ffx='firefox >/dev/null 2>&1 &'
+alias vim='nvim'
 
-alias mojitos='/home/eritque/document/fac/mojitos/bin/mojitos'
+alias ndev='nix develop -c zsh'
 
 # ─────────────────────────────────────────────
 # Shortcut
 # ─────────────────────────────────────────────
 
-hash -d work=~/document/fac/secil
 hash -d tmp=~/document/tmp/
 
 # ─────────────────────────────────────────────
-# Historique (mieux que bash)
+# Historique
 # ─────────────────────────────────────────────
 HISTSIZE=10000
 SAVEHIST=10000
@@ -58,12 +56,12 @@ autoload -Uz compinit
 compinit
 
 # ─────────────────────────────────────────────
-# Correction automatique (optionnelle mais utile)
+# Correction automatique
 # ─────────────────────────────────────────────
 setopt CORRECT
 
 # ─────────────────────────────────────────────
-# Git prompt (équivalent __git_ps1)
+# Git prompt
 # ─────────────────────────────────────────────
 autoload -Uz vcs_info
 
@@ -104,4 +102,3 @@ setopt PROMPT_SUBST
 
 PROMPT='$(prompt_nix)[%n@%m %~${vcs_info_msg_0_}]
 $ '
-
